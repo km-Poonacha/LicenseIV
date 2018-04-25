@@ -97,6 +97,7 @@ def getSCrepo(user):
                 new_row.append(subcriptions['language'])
                 new_row.append(subcriptions['forks_count'])
                 new_row.append(subcriptions['license'])
+                print(subcriptions['license'])
                 # Write subscription row             
                 with open(SCREPO_CSV,'at',encoding='utf-8', newline='') as screpo_obj:
                     screpo_strc = csv.writer(screpo_obj)

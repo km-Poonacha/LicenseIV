@@ -8,6 +8,7 @@ Calculate the license restrictiveness of the SC
 
 import csv
 import json
+import ast
 
 SCREPO_CSV = "C:/Users/kmpoo/Dropbox/HEC/Project 2 -   License/ICIS18/Data/ExportedISRDataCollabSC_24042018.csv"
 CSCREPO_CSV = "C:/Users/kmpoo/Dropbox/HEC/Project 2 -   License/ICIS18/Data/ExportedISRDataCollabSCCalL1_24042018.csv"
@@ -31,7 +32,26 @@ def findlicrest(licj):
                         "European Union Public License 1.2",
                         "Open Software License 3.0"
                          ]
+   
+    if licj:
+        lic_json = ast.literal_eval(licj)
+        lic_name = lic_json.get('name', None)
+        if lic_name in strongcopy_license:
+            print(lic_name," STRONG ")
+            return True , 2
+        elif lic_name in weakcopy_license:
+            print(lic_name," WEAK ")
+            return True , 1
+        elif lic_name in ['Other','Not Found','','None',False]:
+            print(lic_name," NA ")
+            return False , 0
+        else:
+            print(lic_name," PERMISSIVE ")
+            return True , 0
     
+        
+    else:
+        return False, 0
     
     
 def main():
@@ -56,16 +76,17 @@ def main():
                     
                 owner_name = row[2]
                 create_date = row[5]
+
+                print("**** ", row[0]," - ",lic_pred," - ",no_sc)
                 lic_pred = 0
                 no_sc = 0
                 prev_row = row  
-                print("**** ", row[0]," - ",lic_pred," - ",no_sc)
             else:
                 if row[3] != owner_name and create_date > row[8]:
                     found , restrictiveness = findlicrest(row[15])
                     if found == True:
                         no_sc = no_sc + 1
-                        lic_pred = lic_pred + restrictiveness 
+                        lic_pred = lic_pred + int(restrictiveness)
 
 
 main()
