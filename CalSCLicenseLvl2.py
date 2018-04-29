@@ -76,7 +76,7 @@ def main():
     lic_perm_L1_org = 0
     lic_rest_L1_org = 0
     tot_found_sc_L1_org = 0     
-    for i in range(1,16):
+    for i in range(1,17):
         SCREPO_CSV = "C:/Users/kmpoo/Dropbox/HEC/Project 2 -   License/ICIS18/Data/Lvl2/ExportedISRDataCollabSCLvl2_25042018_"+str(i)+".csv"
         print(SCREPO_CSV)
         with open (SCREPO_CSV, 'rt', encoding = 'latin-1') as repocsvobj:
