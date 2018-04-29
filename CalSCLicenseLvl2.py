@@ -126,7 +126,7 @@ def main():
                                 lic_rest = lic_rest + int(restrictiveness)
                             else:
                                 lic_perm = lic_perm + 1 
-                        if found == True and row[5] == 'Organization':
+                        if row[5] == 'Organization':
                             tot_found_sc_L1_org = tot_found_sc_L1_org + 1
                             if int(restrictiveness) > 0:
                                 lic_rest_L1_org = lic_rest_L1_org + int(restrictiveness)
